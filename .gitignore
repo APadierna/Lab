@@ -1,0 +1,38 @@
+# ============================================================
+# Vivado — directorio del proyecto (regenerar con crear_proyecto.py)
+# ============================================================
+vivado/
+
+# Logs y journals de Vivado (generados en el directorio raíz)
+*.jou
+*.log
+*.str
+
+# Directorio temporal de Xilinx (síntesis/impl fuera del proyecto)
+.Xil/
+.ip_user_files/
+
+# Backups automáticos de Vivado
+*.backup.log
+*.backup.jou
+
+# Bitstreams y ficheros de programación
+*.bit
+*.bin
+*.mcs
+*.ltx
+
+# Checkpoint de diseño (síntesis/implementación)
+*.dcp
+
+# Waveforms de simulación
+*.vcd
+*.wdb
+*.wcfg
+
+# ============================================================
+# Sistema operativo
+# ============================================================
+Thumbs.db
+.DS_Store
+desktop.ini
