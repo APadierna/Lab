@@ -101,6 +101,6 @@ El script hace tres cosas automáticamente:
 
 1. **Verifica tu identidad Git.** La primera vez te pedirá nombre y email (se guarda para todos tus repositorios).
 2. **Commitea todos los cambios pendientes** en `src/`, `sim/` y `config.ini`.
-3. **Genera el zip** con nombre `<proyecto>_<tu_nombre>_<fecha>.zip` en la raíz del repositorio.
+3. **Genera el zip** con nombre `<proyecto>_<tu_nombre>_<fecha>.zip` en la carpeta `entregas/`.
 
 Sube ese zip al campus virtual.
