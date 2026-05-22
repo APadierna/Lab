@@ -30,6 +30,9 @@ vivado/
 *.wdb
 *.wcfg
 
+# Zips de entrega (generados por generar_entrega.py)
+*.zip
+
 # ============================================================
 # Sistema operativo
 # ============================================================
