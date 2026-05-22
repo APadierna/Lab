@@ -87,4 +87,20 @@ python scripts/crear_proyecto.py
 
 ## Entrega
 
-Sube a Git **solo los ficheros de la columna izquierda**. El directorio `vivado/` ya está en `.gitignore` y no aparecerá en `git status`.
+Ejecuta el script de entrega:
+
+**Opción A — doble clic:**
+`scripts/generar_entrega.bat`
+
+**Opción B — terminal:**
+```
+python scripts/generar_entrega.py
+```
+
+El script hace tres cosas automáticamente:
+
+1. **Verifica tu identidad Git.** La primera vez te pedirá nombre y email (se guarda para todos tus repositorios).
+2. **Commitea todos los cambios pendientes** en `src/`, `sim/` y `config.ini`.
+3. **Genera el zip** con nombre `<proyecto>_<tu_nombre>_<fecha>.zip` en la raíz del repositorio.
+
+Sube ese zip al campus virtual.
