@@ -123,7 +123,9 @@ def generar_zip(nombre_proyecto: str, nombre_alumno: str):
     fecha      = datetime.now().strftime("%Y%m%d_%H%M")
     slug       = _sanitizar(nombre_alumno)
     nombre_zip = f"{nombre_proyecto}_{slug}_{fecha}.zip"
-    destino    = ROOT / nombre_zip
+    dir_salida = ROOT / "entregas"
+    dir_salida.mkdir(exist_ok=True)
+    destino    = dir_salida / nombre_zip
 
     r = git("archive", "--format=zip", f"--output={destino}", "HEAD")
     if r.returncode == 0:

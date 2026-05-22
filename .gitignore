@@ -31,7 +31,7 @@ vivado/
 *.wcfg
 
 # Zips de entrega (generados por generar_entrega.py)
-*.zip
+entregas/
 
 # ============================================================
 # Sistema operativo
