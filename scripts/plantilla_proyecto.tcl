@@ -10,17 +10,22 @@ set dir_proyecto [file join $root_dir vivado $nombre]
 # ----- Crear proyecto -----
 create_project $nombre $dir_proyecto -part $parte
 
-# ----- Ficheros HDL -----
-set hdl_files {}
-foreach patron [list \
-    [file join $root_dir src hdl *.vhd] \
-    [file join $root_dir src hdl *.v]   \
-    [file join $root_dir src hdl *.sv]  \
-] {
-    foreach f [glob -nocomplain $patron] {
-        lappend hdl_files $f
+# ----- Utilidad: búsqueda recursiva de ficheros -----
+proc find_files {dir extensiones} {
+    set resultado {}
+    foreach ext $extensiones {
+        foreach f [glob -nocomplain [file join $dir $ext]] {
+            lappend resultado $f
+        }
     }
+    foreach subdir [glob -nocomplain -type d [file join $dir *]] {
+        lappend resultado {*}[find_files $subdir $extensiones]
+    }
+    return $resultado
 }
+
+# ----- Ficheros HDL -----
+set hdl_files [find_files [file join $root_dir src hdl] {*.vhd *.v *.sv}]
 
 if {[llength $hdl_files] > 0} {
     add_files -norecurse $hdl_files
@@ -34,26 +39,14 @@ if {[llength $hdl_files] > 0} {
 set_property top $top [current_fileset]
 
 # ----- Restricciones (XDC) -----
-set xdc_files {}
-foreach f [glob -nocomplain [file join $root_dir src constraints *.xdc]] {
-    lappend xdc_files $f
-}
+set xdc_files [find_files [file join $root_dir src constraints] {*.xdc}]
 if {[llength $xdc_files] > 0} {
     add_files -fileset constrs_1 -norecurse $xdc_files
     puts "\[info\] Restricciones añadidas: [llength $xdc_files]"
 }
 
 # ----- Ficheros de simulación -----
-set sim_files {}
-foreach patron [list \
-    [file join $root_dir sim *.vhd] \
-    [file join $root_dir sim *.v]   \
-    [file join $root_dir sim *.sv]  \
-] {
-    foreach f [glob -nocomplain $patron] {
-        lappend sim_files $f
-    }
-}
+set sim_files [find_files [file join $root_dir sim] {*.vhd *.v *.sv}]
 if {[llength $sim_files] > 0} {
     add_files -fileset sim_1 -norecurse $sim_files
     puts "\[info\] Ficheros de simulación añadidos: [llength $sim_files]"
